@@ -1,0 +1,265 @@
+Question 1
+
+Percentage of non-defective items
+A bag contains a total of 'T' nuts and bolts. Out of which there are 'N' nuts. In a quality check, x% of the nuts and y% of bolts in the bag were found to be defective. Design an algorithm and write a Python code to determine the percentage of non-defective items in the bag. For example if T is 200, N is 150, x is 50 and y is 20 then the percentage of non-defective items in bag is 57.5. Round the answer to two decimal places using format function.
+Input for the Problem
+'T' – total number of nuts and bolts in the bag
+'N' – Number of nuts
+'x' – Percentage of defective nuts in the bag
+'y' – Percentage of defective bolts in the bag
+Output of the Problem
+Percentage of non-defective items in bag
+Boundary Conditions
+All inputs > 0
+
+
+
+CODE:
+
+
+# function for finding non-defective percentage of items in bag
+def nonDefective(T, N, x, y):
+    B = T-N
+    nonDefec = (T-(N*x/100+B*y/100))/T*100
+    return nonDefec
+
+
+
+
+# calling the function with given input values as parameters
+result1 = nonDefective(200, 150, 50, 20)
+print('result1 %.2f' % result1)
+
+
+result2 = nonDefective(300, 100, 40, 15)
+print('result2 %.2f' % result2)
+
+
+
+
+
+
+
+
+Question 2
+Calculate the number of birthdays celebrated by Mr.X. If Mr.X was born on 29th February of a leap year then he celebrates birthday only in leap years. Given the date of birth of Mr.X and the current year, design an algorithm and write the Python code to determine the number of birthdays celebrated by Mr.X. A year is a leap year if it is divisible by 4 and not divisible by 100 or when the year is divisible by 400. For example, year 1996 and 2000 are leap years whereas 1900 is not a leap year. Assume that the current day and month is greater than day and month of birthday.
+
+Code:
+# function for calculating the number of birthdays celebrated
+def countBirth(d, m, y, c):
+    if c < y:
+        print("Invalid Input")
+    count = 0
+    if isLeap(y) and d == 29 and m == 2:
+        for i in range(y+1, c+1):
+            if isLeap(i):
+                count += 1
+    else:
+        for i in range(y+1, c+1):
+            count += 1
+    return count
+
+
+# function for checking leap year
+
+
+
+
+def isLeap(year):
+    if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
+        return True
+    return False
+
+
+
+
+# taking user input
+d = int(input("Enter Birth Day : "))
+m = int(input("Enter Birth Month : "))
+y = int(input("Enter Birth Year : "))
+c = int(input("Enter Current Year : "))
+
+
+print("Number of birthdays celebrated is  : ", countBirth(d, m, y, c))
+
+
+
+
+
+
+
+
+
+
+
+Question 3
+A person 'X' has a farm which is rectangular in shape. 'X' wants to plant coconut trees in the farm and he has heard that every tree has to be separated by 2 feet. He needs to calculate the number of plants to be purchased. Write a program to calculate the number of plants when provided with the length and breadth of the farm (in feet). The program should display the number of rows and columns along with the total number of plants required for the farm. For example, if the length and breadth of the farm is 9 feet * 4 feet then the farmer can plant trees in  positions 0, 2, 4, 6, 8 along the length and 0,2,4 along the breadth therefore number of trees to be purchased is 5*3 = 15.
+
+Code:
+# function for calculating the number of plants required
+def farm(length, breadth):
+    lcount, bcount = 0, 0
+    print("Rows : ", end="")
+    for i in range(0, length+1, 2):
+        print(i, end=" ")
+        lcount += 1
+    print("Columns : ", end="")
+    for i in range(0, breadth+1, 2):
+        print(i, end=" ")
+        bcount += 1
+    print("No. of Plants required : ", (lcount*bcount))
+
+
+
+
+# taking user iunput
+length = int(input("Enter Length of Farm : "))
+breadth = int(input("Enter Breadth of Farm : "))
+farm(length, breadth)
+
+
+
+
+
+
+Question 4
+A finance consultant decides to create an application for the public who wants to decide on the type of investment they can make. He needs an application, which when given with the initial amount, no of years of investment ‘n’ and the expected amount after ‘n’ years, should tell the  rate of interest based on which the customers will choose their investments. Assume that the application works with only simple interest calculation. Can you code for Raman? Use Rate of interest = ((expected amount-initial amount) / (initial amount * no of years))*100.
+
+Code:
+
+
+def findRateOfIntrest(initialAmount, noOfYears, expectedAmount):
+    rateOfIntrest = ((expectedAmount - initialAmount) /
+                     (initialAmount*noOfYears))*100
+
+
+    return rateOfIntrest
+# getting user input
+initialAmount = int(input("Enter the initial amount the customer has :"))
+noOfYears = int(input("Enter the no of years he want to invest : "))
+expectedAmount = int(input("Enter the expected amount after n years : "))
+
+
+# function for finding rate of interest
+
+
+
+
+
+
+
+
+# printing results
+print("Rate of intrest : ", findRateOfIntrest(
+    initialAmount, noOfYears, expectedAmount))
+
+
+
+
+
+
+
+Question 5
+Consider the thirsty crow story where a thirsty crow identifies a jug with little water. It puts pebbles into the water to raise the level of water and drinks it. Assume that the initial reading of the jug is 'm1' ml and the crow can drink water if the level of water has come to 'm2' ml.  There are two categories of pebbles small and big in the field. Small pebble can raise the level of water by 'x' ml and big pebble can raise the level of water by 'y' ml. There are 'n' small pebbles. Crow prefers to place small pebbles in jug and then only takes big pebbles. Write an algorithm and the Python code to determine the number of pebbles required to raise the water to ‘m2’ level. For example, if value of 'm1', 'm2','x','y' and 'n' are 54, 300, 10, 20, 10 respectively then the number of pebbles required is 13.
+
+CODE:
+# function for finding number of pebbles required to raise the water to ‘m2’ level.
+def find(m1, m2, x, y, n):
+    req = m2 - m1
+    req = req - x*n
+    if req <= 0:
+        return 0
+    else:
+        if req % y == 0:
+            return req / y
+        else:
+            return (1 + round(req/y))
+
+
+
+
+# taking user inputs
+m1 = int(input("Initial water level : "))
+m2 = int(input("Fianl water level : "))
+x = int(input("Small pebbles level: "))
+y = int(input("Large pebbles level: "))
+n = int(input("No. of Small pebbles: "))
+
+
+print("Large Pabbles required", find(m1, m2, x, y, n))
+
+
+
+
+Question 6
+Given 'n' points, design a flowchart or an algorithm and write the Python code to determine the pair of points that are far from each other. Distance between two points (x1, y1) and (x2, y2) is determined using the formula. Write a function to determine distance between the two points. Consider only two decimal places of distance for comparison.
+Code:
+
+import math
+# function defintion for calculating distance
+
+
+
+
+def distance(x1, y1, x2, y2):
+    a = (x1 - x2)**2
+    b = (y1 - y2)**2
+    return math.sqrt(a+b)
+
+
+
+
+# taking user input
+x1 = int(input("x1: "))
+y1 = int(input("y1: "))
+x2 = int(input("x2: "))
+y2 = int(input("y2: "))
+
+
+print("Distance : %.2f " % distance(x1, y1, x2, y2))
+
+
+
+
+
+Question 7
+A person wants to know his Body Mass Index (BMI). He knows his weight in pounds and height in inches. The evaluator knows the formula for calculating BMI using the formula,
+BMI = (weight in kilograms) / (height in m * height in m)
+Help the person in finding his BMI by writing a program for him. (Use the conversion formulae: 1 pound =0.4536 kilograms, 1 inch = 2.54 cms)
+
+
+Code:
+
+
+# function to calculate the BMI
+def getBMI(weightInPounds, heightInInches):
+    BMI = float(weightInPounds)*0.4536/float(heightInInches)*2.54
+    return BMI
+
+
+
+
+# taking user inputs
+weightInPounds = input("Enter the weight of person in pounds : ")
+heightInInches = input("Enter the height of person in inches : ")
+
+
+
+
+print("BMI : ", getBMI(weightInPounds, heightInInches))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
